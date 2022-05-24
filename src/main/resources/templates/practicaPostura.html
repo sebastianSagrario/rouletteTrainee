@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>practica de plenos</h2>
+    <div th:text="${jugada}"></div>
+    <form action="#" th:action="@{/jugada/calificaJugada}" method="post">
+        <input type="hidden" th:value="${jugada.score}" name="score">
+        <input type="number" name="response">
+        <input type="submit">
+    </form>
+</body>
+</html>
