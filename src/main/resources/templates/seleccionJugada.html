@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="practicaJugada"  method="get">
+        <div th:each="jugada : ${TiposJugadas}" >
+            <input type="checkbox" th:value="${jugada}" th:text="${jugada}" name="jugadaSelect">
+        </div>
+        --------------------
+        <div th:each="valores : ${valoresFicha}">
+            <input type="checkbox" th:value="${valores}" th:text="${valores}" name="fichas">
+        </div>
+        <input type="submit">
+    </form>
+</body>
+</html>
