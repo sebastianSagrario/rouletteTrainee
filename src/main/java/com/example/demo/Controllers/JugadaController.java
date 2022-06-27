@@ -50,7 +50,7 @@ public class JugadaController {
      * @return la vista con el form para practique el aspirante
      */
     @GetMapping("/practicaJugada")
-    public String practicaPostura(@RequestParam TipoJugada jugadaSelect,@RequestParam ValoresFicha fichas, ModelMap mm) {
+    public String practicaPostura(@RequestParam TipoJugada jugadaSelect,@RequestParam(required=false) ValoresFicha fichas, ModelMap mm) {
         try {
             Jugada j;
             System.out.println(jugadaSelect+"-----"+fichas);            
@@ -79,15 +79,22 @@ public class JugadaController {
      * que diga que perdio
      */
     @PostMapping("/calificaJugada")
-    public String calificaPracticaJugada(@RequestParam int score, @RequestParam TipoJugada tipoJugada, @RequestParam ValoresFicha fichas,@RequestParam int response, RedirectAttributes rd) {
+    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam(required=false) ValoresFicha fichas,@RequestParam int response, RedirectAttributes rd) {
 
+        System.out.println(score+"----"+response+"----"+fichas);
+        String dir;
         if (response != score) {
             return "fail";
-        }
-        //tipoJugada = tipoJugada.subSequence(2, tipoJugada.length() - 1).toString();
+        }        
         rd.addFlashAttribute("exito", true);
-        System.out.println("calificado");
-        return "redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada+"&fichas="+fichas;
+        
+        
+        dir="redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada;
+        if (fichas!=null)
+        {            
+            dir+="&fichas="+fichas;
+        }        
+        return  dir;
     }
     
 

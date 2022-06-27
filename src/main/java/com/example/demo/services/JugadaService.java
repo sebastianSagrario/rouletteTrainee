@@ -47,11 +47,13 @@ public class JugadaService {
             default:
                 throw new Exception("seleccion de jugada errorneo");
 
-        }
+        }        
         jugada.setTipoJugada(jugadaSelect);
-        jugada.setValorFicha(ficha);
         calculateScore(jugada);
-        setPay(jugada);
+        if (ficha!=null){
+            jugada.setValorFicha(ficha);
+            setPay(jugada);            
+        }
         getColor(jugada);
         return jugada;
     }

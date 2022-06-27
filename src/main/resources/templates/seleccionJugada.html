@@ -12,9 +12,9 @@
         <div th:each="jugada : ${TiposJugadas}" >
             <input type="checkbox" th:value="${jugada}" th:text="${jugada}" name="jugadaSelect">
         </div>
-        --------------------
+        --------------------OPCIONAL--------------------
         <div th:each="valores : ${valoresFicha}">
-            <input type="checkbox" th:value="${valores}" th:text="${valores}" name="fichas">
+            <input type="checkbox" th:value="${valores}" th:text="${valores}" name="fichas">            
         </div>
         <input type="submit">
     </form>
