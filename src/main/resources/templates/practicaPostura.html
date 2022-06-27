@@ -9,21 +9,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <h2>determina el puntaje de la siguiente jugada</h2>
+    <h2>determina el </h2>
+    <h2 th:text="${jugada.valorFicha} ? 'cuanto paga ' : 'el puntaje de '"></h2>
+    <h2>la siguiente jugada</h2>
+    <div th:if="${jugada.valorFicha}" th:text="${'con fichas de '+jugada.valorFicha}"></div>
     <div th:text="${jugada.color}"></div>
-    <div th:text="${jugada.number}"></div>
-    
+    <div th:text="${jugada.number}"></div>    
     <div th:text="${jugada}"></div>
 
     <form action="calificaJugada" method="post">
-        <input type="hidden" th:value="${jugada.score}" name="score">
+        <input th:if="${jugada.valorFicha !=null}" type="hidden" th:value="${jugada.pay}" name="score">
+        <input th:if="${jugada.valorFicha == null}" type="hidden" th:value="${jugada.score}" name="score">        
         <input type="hidden" th:value="${tipoJugada}" name="tipoJugada">
-        <input type="hidden" th:value="${fichas}" name="fichas">
+        <input th:if="${jugada.valorFicha != null}" type="hidden" th:value="${fichas}" name="fichas">
         <input type="number" name="response">
         <input type="submit">
     </form>
     <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+    <button> <a href="/jugada/seleccion" >ir a seleccion </a> </button>
 </body>
 </html>
