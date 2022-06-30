@@ -69,7 +69,7 @@ public class JugadaController {
     /**
      * 
      * recibe el puntaje de un jugada desde un formulario y califica si la
-     * respuesta es correcta
+     * respuesta es correcta, si es correcta y se solicito un monto se pide un corte, sino sigue pidiendo postura con putnaje simple
      *
      * @param score el puntaje de la jugada
      * @param tipoJugada el tipo de jugada que se esta evaluando
@@ -89,13 +89,49 @@ public class JugadaController {
         rd.addFlashAttribute("exito", true);
         
         
+//        dir="redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada;
+//        if (fichas!=null)
+//        {            
+//            dir+="&fichas="+fichas;
+//   -     }
+    if (fichas==null)
+    {
         dir="redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada;
-        if (fichas!=null)
-        {            
-            dir+="&fichas="+fichas;
-        }        
+    }
+    else
+    {
+        dir="redirect/:jugada/corte?fichas="+fichas+"&monto="+score;
+    }
+        
         return  dir;
     }
+    
+    
+    @GetMapping("/corte")
+    public String GetCorte(@RequestParam ValoresFicha fichas,@RequestParam Double monto,ModelMap mm)
+    {
+        mm.addAttribute("valorfichas", fichas);
+        mm.addAttribute("monto", monto);
+        return "corte";
+    }
+    
+    @PostMapping ("/evaluaCorte")
+    public String evaluaCorte(
+            @RequestParam Double monto,            
+            @RequestParam Double complemento,
+            @RequestParam Byte cantFichas,
+            @RequestParam ValoresFicha valorFicha)
+    {
+        if (monto != (complemento+cantFichas*valorFicha.getValorNominal()))
+        {
+            return "fail";            
+        }
+        return "index";
+    }
+}
+        
+
+    
     
 
 }
