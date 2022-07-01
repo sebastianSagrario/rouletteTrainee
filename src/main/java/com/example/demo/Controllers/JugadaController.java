@@ -26,21 +26,19 @@ public class JugadaController {
     }
 
     /**
-     * deplega el menu de seleccion de la jugada a la vista el usuario elije el tipo de jugada y con que ficha le va a salir
+     * deplega el menu de seleccion de la jugada a la vista el usuario elije el
+     * tipo de jugada y con que ficha le va a salir
+     *
      * @param mm
-     * @return 
+     * @return
      */
-    
     @GetMapping("/seleccion")
-    public String seleccionJugada(ModelMap mm)
-    {
+    public String seleccionJugada(ModelMap mm) {
         mm.addAttribute("TiposJugadas", TipoJugada.values());
         mm.addAttribute("valoresFicha", ValoresFicha.values());
         return "seleccionJugada";
     }
-    
-    
-    
+
     /**
      * envia a la vista una jugada para practicar posturas
      *
@@ -50,11 +48,11 @@ public class JugadaController {
      * @return la vista con el form para practique el aspirante
      */
     @GetMapping("/practicaJugada")
-    public String practicaPostura(@RequestParam TipoJugada jugadaSelect,@RequestParam(required=false) ValoresFicha fichas, ModelMap mm) {
+    public String practicaPostura(@RequestParam TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm) {
         try {
             Jugada j;
-            System.out.println(jugadaSelect+"-----"+fichas);            
-            j = jugadaService.getJugada(jugadaSelect, fichas);                       
+            System.out.println(jugadaSelect + "-----" + fichas);
+            j = jugadaService.getJugada(jugadaSelect, fichas);
             mm.addAttribute("jugada", j);
             mm.addAttribute("tipoJugada", jugadaSelect);
             mm.addAttribute("fichas", fichas);
@@ -67,9 +65,10 @@ public class JugadaController {
     }
 
     /**
-     * 
+     *
      * recibe el puntaje de un jugada desde un formulario y califica si la
-     * respuesta es correcta, si es correcta y se solicito un monto se pide un corte, sino sigue pidiendo postura con putnaje simple
+     * respuesta es correcta, si es correcta y se solicito un monto se pide un
+     * corte, sino sigue pidiendo postura con putnaje simple
      *
      * @param score el puntaje de la jugada
      * @param tipoJugada el tipo de jugada que se esta evaluando
@@ -79,59 +78,57 @@ public class JugadaController {
      * que diga que perdio
      */
     @PostMapping("/calificaJugada")
-    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam(required=false) ValoresFicha fichas,@RequestParam int response, RedirectAttributes rd) {
+    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam(required = false) ValoresFicha fichas, @RequestParam int response, RedirectAttributes rd) {
 
-        System.out.println(score+"----"+response+"----"+fichas);
         String dir;
         if (response != score) {
             return "fail";
-        }        
-        rd.addFlashAttribute("exito", true);
-        
-        
-//        dir="redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada;
-//        if (fichas!=null)
-//        {            
-//            dir+="&fichas="+fichas;
-//   -     }
-    if (fichas==null)
-    {
-        dir="redirect:/jugada/practicaJugada?jugadaSelect="+tipoJugada;
+        }
+        if (fichas == null) {
+            rd.addFlashAttribute("exito", true);
+            return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
+        }
+
+        return "redirect:/jugada/corte?fichas=" + fichas + "&monto=" + score;
     }
-    else
-    {
-        dir="redirect/:jugada/corte?fichas="+fichas+"&monto="+score;
-    }
-        
-        return  dir;
-    }
-    
-    
+
+    /**
+     * desplega el formulario para que el aspirante haga un corte
+     *
+     * @param fichas con las fichas que se va ahacer el corte
+     * @param monto con el monto que se va tratar
+     * @param mm
+     * @return
+     */
     @GetMapping("/corte")
-    public String GetCorte(@RequestParam ValoresFicha fichas,@RequestParam Double monto,ModelMap mm)
-    {
+    public String GetCorte(@RequestParam ValoresFicha fichas, @RequestParam Double monto, ModelMap mm) {
         mm.addAttribute("valorfichas", fichas);
         mm.addAttribute("monto", monto);
         return "corte";
     }
-    
-    @PostMapping ("/evaluaCorte")
+
+    /**
+     * evalua un corto, si se hizo correctamente o no
+     *
+     * @param monto el monto a pagar
+     * @param cantFichas la cantidad de fichas que se entregan
+     * @param valorFicha el valor nominal de las fichas con las que se pagan
+     * @param complemento si hubiese
+     * @param rd
+     * @return
+     */
+    @PostMapping("/evaluaCorte")
     public String evaluaCorte(
-            @RequestParam Double monto,            
+            @RequestParam Double monto,
             @RequestParam Double complemento,
             @RequestParam Byte cantFichas,
-            @RequestParam ValoresFicha valorFicha)
-    {
-        if (monto != (complemento+cantFichas*valorFicha.getValorNominal()))
-        {
-            return "fail";            
+            @RequestParam ValoresFicha valorFicha,
+            RedirectAttributes rd) {
+        //falta validar aca
+        if (monto != (complemento + cantFichas * valorFicha.getValorNominal())) {
+            return "fail";
         }
+        rd.addFlashAttribute("exito", true);
         return "index";
     }
-}
-        
-
-    
-    
-
 }

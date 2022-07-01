@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div th:text=" ${'con fichas de '+ valorfichas +' pagar '+monto} "></div>
+    <form action="/jugada/evaluaCorte" method="post">
+        <input type="hidden" th:value="${monto}" name="monto">
+        <input type="hidden" th:value="${valorfichas}" name="valorFicha">
+        cantidad de fichas
+        <input type="number" name="cantFichas" >
+        complemento si es todo fichas poner cero
+        <input type="number" name="complemento" value=0 >
+        <input type="submit">
+    </form>
+</body>
+</html>
