@@ -54,7 +54,7 @@ public class JugadaService {
             jugada.setValorFicha(ficha);
             setPay(jugada);            
         }
-        getColor(jugada);
+        setColor(jugada);
         return jugada;
     }
 
@@ -143,8 +143,10 @@ public class JugadaService {
             throw new Exception("imposible obtener un complex con ese numero de fichas");
         }
         while (maxChips > 0) {
-            basic = (int) (Math.random() * (Basic.values().length));
-            if (j.getPosture()[basic] == 0) {
+            //basic = (int) (Math.random() * (Basic.values().length));
+            basic=elegirBasicoRandom();
+            System.out.println("basico "+basic);
+            if (j.getPosture()[basic] == 0) {                
                 chips = (int) (Math.random() * (maxChips - 1)) + 1;
                 addBasic(basic, chips, j);
                 maxChips -= chips;
@@ -168,7 +170,11 @@ public class JugadaService {
         j.setScore(sc);
     }
 
-    private void getColor(Jugada jugada) {
+    /**
+     * setea color de acuerdo al numero
+     * @param jugada 
+     */
+    private void setColor(Jugada jugada) {
         int random = (int) (Math.random() + 0.5);
         if (jugada.getNumber() == 0) {
             jugada.setColor(Color.CERO);
@@ -190,4 +196,23 @@ public class JugadaService {
         jugada.setPay(pay);
     }
 
+    
+    /**
+     * quiero los plenos y medios y cuadros prevalezcan pro encima de las calles y las lineas
+     * @return 
+     */
+    
+    private int elegirBasicoRandom()
+    {
+        Double selector;
+        int i;
+        Double  probAcumulada []={0.45,0.70,0.85,0.95,1.0};
+        selector=Math.random();
+        i=0;
+        while(i<probAcumulada.length && selector>probAcumulada[i]){
+            i++;
+        }
+        return i;        
+    }
+    
 }
