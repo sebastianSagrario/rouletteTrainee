@@ -80,18 +80,30 @@ public class JugadaController {
     @PostMapping("/calificaJugada")
     public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam(required = false) ValoresFicha fichas, @RequestParam int response, RedirectAttributes rd) {
 
-        String dir;
-        if (response != score) {
-            return "fail";
+        try{
+            String dir;
+            if (response != score) {
+                return "fail";
+            }
+            if (fichas == null) {
+                rd.addFlashAttribute("exito", true);
+                return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
+            }
+            return "redirect:/jugada/corte?fichas=" + fichas + "&monto=" + score;            
         }
-        if (fichas == null) {
-            rd.addFlashAttribute("exito", true);
-            return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
+        catch(Exception e){
+            return "redirect:/jugada/seleccion";
         }
-
-        return "redirect:/jugada/corte?fichas=" + fichas + "&monto=" + score;
     }
 
+    @GetMapping("/seleccionCorte")
+    public String solicitarCorte(ModelMap mm)
+    {
+        mm.addAttribute("valoresFicha", ValoresFicha.values());
+        return "corteSeleccion";
+    }
+    
+    
     /**
      * desplega el formulario para que el aspirante haga un corte
      *
@@ -121,7 +133,7 @@ public class JugadaController {
     public String evaluaCorte(
             @RequestParam Double monto,
             @RequestParam Double complemento,
-            @RequestParam Byte cantFichas,
+            @RequestParam Integer cantFichas,
             @RequestParam ValoresFicha valorFicha,
             RedirectAttributes rd) {
         //falta validar aca
@@ -129,6 +141,6 @@ public class JugadaController {
             return "fail";
         }
         rd.addFlashAttribute("exito", true);
-        return "index";
+        return "redirect:/";
     }
 }
