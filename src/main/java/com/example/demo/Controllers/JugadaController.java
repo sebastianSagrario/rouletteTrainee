@@ -78,8 +78,9 @@ public class JugadaController {
      * que diga que perdio
      */
     @PostMapping("/calificaJugada")
-    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam(required = false) ValoresFicha fichas, @RequestParam int response, RedirectAttributes rd) {
+    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam ValoresFicha fichas, @RequestParam int response, RedirectAttributes rd) {
 
+        System.out.println("funciona mierda!");
         try{
             String dir;
             if (response != score) {
@@ -114,6 +115,11 @@ public class JugadaController {
      */
     @GetMapping("/corte")
     public String GetCorte(@RequestParam ValoresFicha fichas, @RequestParam Double monto, ModelMap mm) {
+        if(monto%fichas.getValorNominal()!=0){
+
+            mm.addAttribute("error","no es posible obtener ese monto con esas fichas");
+            return "redirect:/jugada/seleccionCorte";
+        }
         mm.addAttribute("valorfichas", fichas);
         mm.addAttribute("monto", monto);
         return "corte";

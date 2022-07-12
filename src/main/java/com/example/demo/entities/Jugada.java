@@ -7,6 +7,7 @@ import com.example.demo.Enums.ValoresFicha;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Entity

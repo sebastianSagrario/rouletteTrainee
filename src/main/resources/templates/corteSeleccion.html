@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
+    <div th:if="${error}!=null" style="color:red ; size:200px;" th:text="${error}"></div>
     <form action="corte"  method="get">
         ingrese valor de fichas
         <div th:each="valores : ${valoresFicha}">
