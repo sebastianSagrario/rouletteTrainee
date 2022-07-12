@@ -14,9 +14,9 @@
 	<packaging>war</packaging>
 	<name>posturas_casineras</name>
 	<description>C de casineta casinetaaa</description>
-	<properties>
+<!--	<properties>
 		<java.version>18</java.version>
-	</properties>
+	</properties>-->
 	<dependencies>
                   <dependency>
                 <groupId>org.springframework.boot</groupId>
