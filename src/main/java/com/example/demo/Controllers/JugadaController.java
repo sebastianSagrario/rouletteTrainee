@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class JugadaController {
      * @param mm
      * @return
      */
-    @GetMapping("/seleccion")
+    @GetMapping("/seleccionJugada")
     public String seleccionJugada(ModelMap mm) {
         mm.addAttribute("TiposJugadas", TipoJugada.values());
         mm.addAttribute("valoresFicha", ValoresFicha.values());
@@ -48,8 +49,12 @@ public class JugadaController {
      * @return la vista con el form para practique el aspirante
      */
     @GetMapping("/practicaJugada")
-    public String practicaPostura(@RequestParam TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm) {
+    public String practicaPostura(@RequestParam(required=false) TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm,RedirectAttributes rd) {
         try {
+            if(jugadaSelect==null)
+            {                
+                throw new Exception("debe seleccionar una jugada");
+            }
             Jugada j;
             System.out.println(jugadaSelect + "-----" + fichas);
             j = jugadaService.getJugada(jugadaSelect, fichas);
@@ -59,7 +64,8 @@ public class JugadaController {
         } catch (Exception e) {
             System.out.println("erororrrr");
             System.out.println(e.getMessage());
-            mm.addAttribute("error", e.getMessage());
+            rd.addFlashAttribute("error", e.getMessage());
+            return "redirect:/jugada/seleccionJugada";
         }
         return "practicaPostura";
     }
@@ -78,18 +84,20 @@ public class JugadaController {
      * que diga que perdio
      */
     @PostMapping("/calificaJugada")
-    public String calificaPracticaJugada(@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam ValoresFicha fichas, @RequestParam int response, RedirectAttributes rd) {
-
-        System.out.println("funciona mierda!");
+    public String calificaPracticaJugada(@ModelAttribute("jugada") Jugada jugadaObj){//@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam ValoresFicha fichas, @RequestParam int response,@ModelAttribute("jugada") Jugada jugadaObj, RedirectAttributes rd) {
         try{
+            int fichas=0;
+            int response=0;
+            int score=1;
             String dir;
+            System.out.println(jugadaObj.getScore()+" aca buey");
             if (response != score) {
                 return "fail";
             }
-            if (fichas == null) {
-                rd.addFlashAttribute("exito", true);
-                return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
-            }
+           // if (fichas == null) {
+             //   rd.addFlashAttribute("exito", true);
+               // return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
+            //}
             return "redirect:/jugada/corte?fichas=" + fichas + "&monto=" + score;            
         }
         catch(Exception e){

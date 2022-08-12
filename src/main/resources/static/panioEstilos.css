@@ -1,0 +1,93 @@
+body
+{
+    font-family: sans-serif;
+    color: green;
+}
+
+.panio
+{
+    border-top: 10px solid yellow;
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
+    background-color: yellow;
+    gap: 10px;
+    height:470px ;
+    width: 470px;
+    /* z-index: 0; */
+}
+.sector
+{
+    height: 150px;
+    width: 150px;
+    background-color: green;
+    position: relative;
+}
+
+.ficha
+{
+    outline: solid 2px black;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+}
+
+/* .c1 {    
+    bottom: -25px;
+    right: -25px;
+}
+.c2 {
+    bottom: -25px;
+    left: -25px;
+}
+.c3{
+    top: -25px;
+    right: -25px;
+}
+.c4{
+    top: -25px;
+    left: -25px;
+} */
+
+.m1
+{
+    bottom: -25px;   
+}
+
+.m2
+{    
+    right:-25px;
+}
+
+.m3
+{
+    left:-25px;
+}
+
+.m4
+{
+    top: -25px;
+}
+
+.pl1{
+
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.l1
+{
+   right: -25px;   
+
+}
+.l2
+{   
+    left: -25px;
+}
+.ca1{
+    left: 0;
+    right: 0;
+    top: -25px;
+    margin: auto;
+}

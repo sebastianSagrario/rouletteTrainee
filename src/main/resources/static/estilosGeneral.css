@@ -1,0 +1,72 @@
+body
+{
+    font-family: 'Oswald', sans-serif;
+    background-image: url("/estrellaNegra.jpg");
+}
+h1,h2
+{
+    font-family: 'Monoton', cursive;
+    font-weight: 400;
+}
+h1
+{
+    font-size: 80px;
+}
+h2
+{
+    font-size: 40px ;
+    right: 500px;
+}
+a{
+    text-decoration: none;
+}
+footer
+{
+    background: rgba(236, 236, 56, 0.492);    
+    padding: 10px;
+
+}
+
+.marcoTitulo
+{
+    background: rgba(236, 236, 56, 0.888);    
+}
+
+.selector
+{    
+  display: flex;
+  justify-content: center;
+}
+
+.practica
+{
+    background-color:  rgba(236, 236, 56, 1);;
+    width: 500px;
+    height: 550px;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 2%;
+}
+
+.descripcion
+{
+    font-weight: normal;
+    font-size: 20px;
+
+    color: black;
+
+}
+
+
+.practica > img{
+ 
+    right: 100%;
+    width: 400px;
+    height: 400px;
+}
+
+.practica:hover
+{
+    outline: 7px solid #FFF;
+}
+    

@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Oswald:wght@300;348;400;700&display=swap" rel="stylesheet">
+
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/estilosGeneral.css">
+
 </head>
 <body>
-    <div>C de casineta casineta casineta</div>
-    <a href="/jugada/seleccion">practica de jugadas</a><br>
-    <a href="/jugada/seleccionCorte">practica de cortes</a>    
+    <div class="marcoTitulo" >
+        <h1>Casino</h1>
+        <h2>Roulette trainer</h2>
+        <!-- ah re lo ponia en ingles -->
+    </div>    
+            <div class="selector">
+                <a href="/jugada/seleccionJugada" >
+                    <div class="practica jugada">
+                        <img src="/pañoRuleta.jpg" alt="imagen bonita de un paño de ruleta">
+                        <p class="descripcion">
+                            Practica una jugada aleatoria de sobre un paño de ruleta americana. <br>
+                            Elige entre los distintas modalidades de jugada y valores de ficha
+                        </p>
+                    </div>
+                </a>
+           
+                <a href="/jugada/seleccionCorte">
+                    <div class="practica cortes">
+                        <img src="/bancaRuleta.jpg" alt="imgagen de una banca de ruleta">
+                        <p class="descripcion">
+                            selecionar un valor de ficha y decide como aplicarle un corte a un monto determinado
+                        </p>
+                    </div>        
+                </a>
+        </div>
+    
+    
     <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
+    <footer> Desarrollado por sebaElReCoder</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
