@@ -17,12 +17,11 @@ public class Jugada {
     @Id
     private String id;
     private int score;
-    private int[] posture;//contador de basicos
-    private Color color;
-    private Integer number;
+    private int[] posture;//contador de basicos    
     private TipoJugada tipoJugada;
     private ValoresFicha valorFicha;
     private Double pay;
+    private Double response;
     public static final int PLENO = 0;
     public static final int SEMI = 1;
     public static final int CUADRO = 2;
@@ -31,8 +30,7 @@ public class Jugada {
 
     public Jugada() {
         posture = new int[Basic.values().length];
-        score = 0;
-        number=(int)(Math.random()*36);
+        score = 0;        
     }
 
     public Jugada(int score, int[] posture) {

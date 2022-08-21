@@ -3,8 +3,9 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Oswald:wght@300;348;400;700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Monoton&family=Oswald:wght@300;348;400;700&family=Paytone+One&family=Staatliches&display=swap" rel="stylesheet">
     
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,34 +16,54 @@
 
 </head>
 <body>
-    <div class="marcoTitulo" >
-        <h1>Casino</h1>
-        <h2>Roulette trainer</h2>
-        <!-- ah re lo ponia en ingles -->
-    </div>    
-            <div class="selector">
-                <a href="/jugada/seleccionJugada" >
-                    <div class="practica jugada">
-                        <img src="/pañoRuleta.jpg" alt="imagen bonita de un paño de ruleta">
-                        <p class="descripcion">
-                            Practica una jugada aleatoria de sobre un paño de ruleta americana. <br>
-                            Elige entre los distintas modalidades de jugada y valores de ficha
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid marcoTitulo">
+            <a class="navbar-brand" href="/">
+                <img src="/ruleta.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            </a>
+            <H1>CASINO</H1>
+        </div>
+    </nav>  
+
+    <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 mt-2">
+                <div class="card h-100" onclick="location.href='/jugada/seleccionJugada';" style="cursor:pointer;">
+                    <div class="card-body  practica">
+                        <h3>Practica Jugadas</h3>
+                        <img src="/pañoRuleta.png" alt="imagen bonita de un paño de ruleta" class="card-img">
+                        <p class="descripcion w-100">
+                            Practica una jugada aleatoria sobre un paño de ruleta americana. <br>                               
                         </p>
                     </div>
-                </a>
-           
-                <a href="/jugada/seleccionCorte">
-                    <div class="practica cortes">
-                        <img src="/bancaRuleta.jpg" alt="imgagen de una banca de ruleta">
-                        <p class="descripcion">
+                </div>
+            </div>            
+            <div class="col-12 col-md-6 mt-2">
+                <div class="card h-100"  onclick="location.href='/jugada/seleccionCorte';" style="cursor:pointer;">
+                    <div class="card-body  practica">
+                        <h3>Practica Cortes</h3>
+                        <img src="/bancaRuleta.jpg" alt="imgagen de una banca de ruleta" class="card-img">
+                        <p class="descripcion w-100">
                             selecionar un valor de ficha y decide como aplicarle un corte a un monto determinado
                         </p>
-                    </div>        
-                </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
+
+
+
+
+
+
+
     
-    
-    <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
+
     <footer> Desarrollado por sebaElReCoder</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

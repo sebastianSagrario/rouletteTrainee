@@ -1,27 +1,31 @@
+
 body
 {
     font-family: 'Oswald', sans-serif;
     background-image: url("/estrellaNegra.jpg");
 }
-h1,h2
-{
+h1{
     font-family: 'Monoton', cursive;
     font-weight: 400;
-}
-h1
-{
-    font-size: 80px;
+    font-size: 50px;
 }
 h2
 {
-    font-size: 40px ;
-    right: 500px;
+    padding-bottom: 10px;
+    font-family: sans-serif;
+    font-size: 60px ;
+    font-weight: bolder;
+}
+h3{
+    font-family: 'Paytone One', sans-serif
 }
 a{
+    color: #000;
     text-decoration: none;
 }
 footer
 {
+    top: 0px;
     background: rgba(236, 236, 56, 0.492);    
     padding: 10px;
 
@@ -29,7 +33,7 @@ footer
 
 .marcoTitulo
 {
-    background: rgba(236, 236, 56, 0.888);    
+    background: rgba(236, 236, 56, 0.888);   
 }
 
 .selector
@@ -40,33 +44,47 @@ footer
 
 .practica
 {
-    background-color:  rgba(236, 236, 56, 1);;
-    width: 500px;
-    height: 550px;
-    margin: 50px;
-    padding: 20px;
-    border-radius: 2%;
+    background-color:  rgba(236, 236, 56, 1);
 }
+
+.card
+{
+    max-width: 700px;
+}
+
 
 .descripcion
 {
     font-weight: normal;
     font-size: 20px;
-
     color: black;
-
-}
-
-
-.practica > img{
- 
-    right: 100%;
-    width: 400px;
-    height: 400px;
+    text-align: center;
+    overflow-x: hidden;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .practica:hover
 {
     outline: 7px solid #FFF;
 }
+
+.boton:hover{
+    outline: solid #fff 3px;
+
+}
     
+.boton
+{
+    text-align: center;
+    text-decoration: none;
+    background-color:  rgba(236, 236, 56, 1);
+    color: black;
+    height: 40px;
+    border-radius: 2% ;
+}
+
+.input-group
+{
+    max-width: 400px;
+}

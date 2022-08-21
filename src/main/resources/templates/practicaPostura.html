@@ -2,30 +2,107 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Monoton&family=Oswald:wght@300;348;400;700&family=Paytone+One&family=Staatliches&display=swap" rel="stylesheet">
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/panioEstilos.css">
+    <link rel="stylesheet" href="/estilosGeneral.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <h2>determina el </h2>
-    <h2 th:text="${jugada.valorFicha} ? 'cuanto paga ' : 'el puntaje de '"></h2>
-    <h2>la siguiente jugada</h2>
-    <div th:if="${jugada.valorFicha}" th:text="${'con fichas de '+jugada.valorFicha}"></div>
-    <div th:text="${jugada.color}"></div>
-    <div th:text="${jugada.number}"></div>    
-    <div th:text="${jugada}"></div>
 
-    <form action="calificaJugada" method="post">
-        <input th:if="${jugada.valorFicha !=null}" type="hidden" th:value="${jugada.pay}" name="score">
-        <input th:if="${jugada.valorFicha == null}" type="hidden" th:value="${jugada.score}" name="score">        
-        <input type="hidden" th:value="${tipoJugada}" name="tipoJugada">
-        <input th:if="${jugada.valorFicha != null}" type="hidden" th:value="${fichas}" name="fichas">
-        <input type="number" name="response" value=0>
-        <input type="submit">
-    </form>
-    <button> <a href="/jugada/seleccion" >ir a seleccion </a> </button>
+    <nav class="navbar navbar-dark bg-dark " style="width: 100vw;">
+        <div class="container-fluid marcoTitulo">
+            <a class="navbar-brand" href="/">
+                <img src="/ruleta.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            </a>
+            <H1>CASINO</H1>
+        </div>
+    </nav>
+    
+        
+    <center>
+        <div class="container d-flex">
+            <div class="row">
+                <div class="col-12  m-3">
+                    <div class="card h-100"  style="cursor:pointer;">
+                        <div class="card-body  practica">                            
+                            <h2 class="marcoTitulo " th:if="${jugada.valorFicha}!=null" th:text="${'Determinar cuanto paga la siguiente jugada con fichas de valor '+jugada.valorFicha}" ></h2>
+                            <h2 class="marcoTitulo " th:if="${jugada.valorFicha} ==null" th:text="${'Determinar el puntaje de la siguiente jugada'}"></h2>
+                            <div class="descripcion" style="font-size: 35px ;" th:text="${jugada}"></div>
+                            <form action="calificaJugada" method="post" th:object="${jugada}">
+                                <input type="hidden" th:field="*{score}">
+                                <input type="hidden" th:field="*{posture}">
+                                <input type="hidden" th:field="*{tipoJugada}">
+                                <input type="hidden" th:field="*{valorFicha}">
+                                <input type="hidden" th:field="*{pay}">
+                                <div class="input-group input-group-lg d-flex">
+                                    <span class="input-group-text" id="inputGroup-sizing-lg">Su respuesta</span>
+                                    <input type="number" th:field="*{response}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                    <input class="btn btn-dark btn-lg" type="submit">        
+                                </div>
+                                <br>
+                                <a class="btn btn-dark btn-lg" href="/jugada/seleccionJugada" >volver a seleccion </a>
+                                <br>
+                            </form>
+                            <div th:if="${error}!=null" th:text="${error}"></div>
+                        </div>
+                    </div>
+                </div>            
+                <div class="col-12  m-3">
+                    <div class="card h-100 " style="cursor:pointer;">
+                        <div class="card-body  practica ">
+                            <div class="panio mx-auto">
+                                <!-- fila uno -->    
+                                <div class="sector sc1 sl1"></div>
+                                <div class="sector sm1 sca1"></div>
+                                <div class="sector sc2 sl2"></div>
+                        
+                                <!-- fila dos -->
+                                <div class="sector sm2"></div>
+                                <div class="sector spl1"></div>
+                                <div class="sector sm3"></div>
+                        
+                                <!-- fila tres -->
+                                <div class="sector sc3"></div>
+                                <div class="sector sm4"></div>
+                                <div class="sector sc4"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </center>
+       
+
+
+
+
+
+
+  
+    
+   
+
+    <script src="/dibujadorJugadas.js"></script>
+    <script th:inline="javascript"  >
+        /*<![CDATA[*/
+        var posture = /*[[${jugada.posture}]]*/ "Test";
+        /*]]>*/
+        for (let i=0;i<posture.length;i++)
+        {
+            armar(i,posture[i]);
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>

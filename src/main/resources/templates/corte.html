@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Monoton&family=Oswald:wght@300;348;400;700&family=Paytone+One&family=Staatliches&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/panioEstilos.css">
+    <link rel="stylesheet" href="/estilosGeneral.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,17 +16,38 @@
     <title>Document</title>
 </head>
 <body>
-    practica de corte
-    <div th:text=" ${'con fichas de '+ valorfichas +' pagar '+monto} "></div>
-    <form action="/jugada/evaluaCorte" method="post">
-        <input type="hidden" th:value="${monto}" name="monto">
-        <input type="hidden" th:value="${valorfichas}" name="valorFicha">
-        cantidad de fichas
-        <input type="number" name="cantFichas" > <br>
-        complemento
-        <input type="number" name="complemento" value=0 ><br>
-        <input type="submit">
-    </form>
+    
+    <nav class="navbar navbar-dark bg-dark " style="width: 100vw;">
+        <div class="container-fluid marcoTitulo">
+            <a class="navbar-brand" href="/">
+                <img src="/ruleta.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            </a>
+            <H1>CASINO</H1>
+        </div>
+    </nav>
+    <div class="container d-flex">
+        <div class="row">
+            <div class="col-12  m-3">
+                <div class="card h-100"  style="cursor:pointer;">
+                    <div class="card-body  practica">       
+                        <div th:text=" ${'con fichas de '+ valorfichas +' pagar '+monto} "></div>
+                        <form action="/jugada/evaluaCorte" method="post">
+                            <input type="hidden" th:value="${monto}" name="monto">
+                            <input type="hidden" th:value="${valorfichas}" name="valorFicha">
+                            cantidad de fichas
+                            <input type="number" name="cantFichas" > <br>
+                            complemento
+                            <input type="number" name="complemento" value=0 ><br>
+                            <input type="submit">
+                        </form>                     
+                    <div th:if="${error}!=null" th:text="${error}"></div>
+                </div>
+            </div>
+        </div>
+    </div>            
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 

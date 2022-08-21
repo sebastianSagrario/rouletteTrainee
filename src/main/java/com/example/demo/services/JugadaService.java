@@ -53,8 +53,7 @@ public class JugadaService {
         if (ficha!=null){
             jugada.setValorFicha(ficha);
             setPay(jugada);            
-        }
-        setColor(jugada);
+        }        
         return jugada;
     }
 
@@ -145,7 +144,7 @@ public class JugadaService {
         while (maxChips > 0) {
             //basic = (int) (Math.random() * (Basic.values().length));
             basic=elegirBasicoRandom();
-            System.out.println("basico "+basic);
+            System.out.println("basico "+basic);//bucle infinito aca cuando crashea
             if (j.getPosture()[basic] == 0) {                
                 chips = (int) (Math.random() * (maxChips - 1)) + 1;
                 addBasic(basic, chips, j);
@@ -169,22 +168,6 @@ public class JugadaService {
         }
         j.setScore(sc);
     }
-
-    /**
-     * setea color de acuerdo al numero
-     * @param jugada 
-     */
-    private void setColor(Jugada jugada) {
-        int random = (int) (Math.random() + 0.5);
-        if (jugada.getNumber() == 0) {
-            jugada.setColor(Color.CERO);
-        } else if (random == 0) {
-            jugada.setColor(Color.COLORADO);
-        } else {
-            jugada.setColor(Color.NEGRO);
-        }
-    }
-
     /**
      * setea lo que paga la jugada de acuerdo al valor de ficha asignado
      *

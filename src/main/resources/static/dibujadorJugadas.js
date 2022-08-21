@@ -1,17 +1,7 @@
 
                 //retorna un elemento imagen qeu representa un pilon lo uso para seleccionar clases usando el array jugada 
                 const basicoClase=["pl","m","c","ca","l"];
-                /*<![CDATA[*/
-                    var jugada = /*[[${jugada}]]*/ "Test";                    
-                /*]]>*/
-                var postura=jugada.posture;
-                console.log(postura);
-                for(let i=0;i<postura.length;i++)
-                {
-                    armar(i,postura[i]);
-                }
-
-
+                            
                 function moverFichasMedio(ficha,nMedio,pos,fichAcum)
                 {
                     switch(nMedio)

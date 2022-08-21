@@ -49,14 +49,12 @@ public class JugadaController {
      * @return la vista con el form para practique el aspirante
      */
     @GetMapping("/practicaJugada")
-    public String practicaPostura(@RequestParam(required=false) TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm,RedirectAttributes rd) {
+    public String practicaPostura(@RequestParam(required = false) TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm, RedirectAttributes rd) {
         try {
-            if(jugadaSelect==null)
-            {                
+            if (jugadaSelect == null) {
                 throw new Exception("debe seleccionar una jugada");
             }
             Jugada j;
-            System.out.println(jugadaSelect + "-----" + fichas);
             j = jugadaService.getJugada(jugadaSelect, fichas);
             mm.addAttribute("jugada", j);
             mm.addAttribute("tipoJugada", jugadaSelect);
@@ -84,35 +82,36 @@ public class JugadaController {
      * que diga que perdio
      */
     @PostMapping("/calificaJugada")
-    public String calificaPracticaJugada(@ModelAttribute("jugada") Jugada jugadaObj){//@RequestParam Double score, @RequestParam TipoJugada tipoJugada, @RequestParam ValoresFicha fichas, @RequestParam int response,@ModelAttribute("jugada") Jugada jugadaObj, RedirectAttributes rd) {
-        try{
-            int fichas=0;
-            int response=0;
-            int score=1;
-            String dir;
-            System.out.println(jugadaObj.getScore()+" aca buey");
-            if (response != score) {
-                return "fail";
+    public String calificaPracticaJugada(@ModelAttribute Jugada jugada, RedirectAttributes rd, ModelMap model) {
+        System.out.println("funcionaaaa");
+        try {
+            if (jugada.getResponse() == null) {
+                throw new Exception("debe enviar una respuesta valida");
             }
-           // if (fichas == null) {
-             //   rd.addFlashAttribute("exito", true);
-               // return "redirect:/jugada/practicaJugada?jugadaSelect=" + tipoJugada;
-            //}
-            return "redirect:/jugada/corte?fichas=" + fichas + "&monto=" + score;            
-        }
-        catch(Exception e){
-            return "redirect:/jugada/seleccion";
+            String dir;
+            if (jugada.getResponse() == jugada.getScore() || jugada.getResponse().equals(jugada.getPay())) {
+                if (jugada.getValorFicha() == null) {
+                    rd.addFlashAttribute("exito", true);
+                    return "redirect:/jugada/practicaJugada?jugadaSelect=" + jugada.getTipoJugada();
+                }
+                return "redirect:/jugada/corte?fichas=" + jugada.getValorFicha() + "&monto=" + jugada.getPay();
+            } else {
+                model.addAttribute("jugada", jugada);
+                model.addAttribute("error", "esta seguro pagador?");
+                return "practicaPostura";
+            }
+        } catch (Exception e) {
+            rd.addFlashAttribute("error", e.getMessage());
+            return "redirect:/jugada/practicaJugada?jugadaSelect=" + jugada.getTipoJugada() + "&fichas=" + jugada.getValorFicha();
         }
     }
 
     @GetMapping("/seleccionCorte")
-    public String solicitarCorte(ModelMap mm)
-    {
+    public String solicitarCorte(ModelMap mm) {
         mm.addAttribute("valoresFicha", ValoresFicha.values());
         return "corteSeleccion";
     }
-    
-    
+
     /**
      * desplega el formulario para que el aspirante haga un corte
      *
@@ -122,15 +121,24 @@ public class JugadaController {
      * @return
      */
     @GetMapping("/corte")
-    public String GetCorte(@RequestParam ValoresFicha fichas, @RequestParam Double monto, ModelMap mm) {
-        if(monto%fichas.getValorNominal()!=0){
+    public String GetCorte(@RequestParam(required=false) ValoresFicha fichas, @RequestParam(required = false) Double monto, ModelMap mm, RedirectAttributes rd) {
+        try {
+            if (fichas == null) {
+                throw new Exception("debe seleccionar un valor de ficha");
+            }
 
-            mm.addAttribute("error","no es posible obtener ese monto con esas fichas");
+            if (monto == null) {
+                monto = Math.floor(500 * Math.random() + 5) * fichas.getValorNominal();
+            } else if (monto % fichas.getValorNominal() != 0) {
+                throw new Exception("no es posible obtener ese monto con esas fichas");
+            }
+            mm.addAttribute("valorfichas", fichas);
+            mm.addAttribute("monto", monto);
+            return "corte";
+        } catch (Exception e) {
+            rd.addFlashAttribute("error", e.getMessage());
             return "redirect:/jugada/seleccionCorte";
         }
-        mm.addAttribute("valorfichas", fichas);
-        mm.addAttribute("monto", monto);
-        return "corte";
     }
 
     /**
