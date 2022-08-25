@@ -138,6 +138,7 @@ public class JugadaService {
         int chips;
         int basic;
         j = new Jugada();
+        System.out.println("bruu");
         if (maxChips < 0) {
             throw new Exception("imposible obtener un complex con ese numero de fichas");
         }

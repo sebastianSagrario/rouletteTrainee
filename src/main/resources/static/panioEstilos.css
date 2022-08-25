@@ -4,12 +4,18 @@ body
     color: green;
 }
 
+.periferia
+{
+    background-color:  rgba(236, 236, 56, 1);
+}
+
 .panio
 {
     border-top: 10px solid yellow;
+    border-bottom: 20px solid yellow;
     display: grid;
-    grid-template-columns: 150px 150px 150px;
-    grid-template-rows: 150px 150px 150px;
+    grid-template-columns: 9.3em 9.3em 9.3em;
+    grid-template-rows: 9.3em 9.3em 9.3em;
     background-color: yellow;
     gap: 10px;
     height:470px ;
@@ -18,8 +24,8 @@ body
 }
 .sector
 {
-    height: 150px;
-    width: 150px;
+    height: 9.3em;
+    width: 9.3;
     background-color: green;
     position: relative;
 }

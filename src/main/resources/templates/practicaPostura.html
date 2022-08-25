@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-dark bg-dark " style="width: 100vw;">
+    <nav class="navbar navbar-dark bg-dark ">
         <div class="container-fluid marcoTitulo">
             <a class="navbar-brand" href="/">
                 <img src="/ruleta.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -26,17 +26,16 @@
             <H1>CASINO</H1>
         </div>
     </nav>
-    
-        
+
     <center>
         <div class="container d-flex">
             <div class="row">
                 <div class="col-12  m-3">
                     <div class="card h-100"  style="cursor:pointer;">
                         <div class="card-body  practica">                            
-                            <h2 class="marcoTitulo " th:if="${jugada.valorFicha}!=null" th:text="${'Determinar cuanto paga la siguiente jugada con fichas de valor '+jugada.valorFicha}" ></h2>
-                            <h2 class="marcoTitulo " th:if="${jugada.valorFicha} ==null" th:text="${'Determinar el puntaje de la siguiente jugada'}"></h2>
-                            <div class="descripcion" style="font-size: 35px ;" th:text="${jugada}"></div>
+                            <h2 th:if="${jugada.valorFicha}!=null" th:text="${'Determinar cuanto paga la siguiente jugada con fichas de valor '+jugada.valorFicha}" ></h2>
+                            <h2  th:if="${jugada.valorFicha} ==null" th:text="${'Determinar el puntaje de la siguiente jugada'}"></h2>
+                            <div  style="font-size: 35px ;" th:text="${jugada}"></div>
                             <form action="calificaJugada" method="post" th:object="${jugada}">
                                 <input type="hidden" th:field="*{score}">
                                 <input type="hidden" th:field="*{posture}">
@@ -57,42 +56,13 @@
                     </div>
                 </div>            
                 <div class="col-12  m-3">
-                    <div class="card h-100 " style="cursor:pointer;">
-                        <div class="card-body  practica ">
-                            <div class="panio mx-auto">
-                                <!-- fila uno -->    
-                                <div class="sector sc1 sl1"></div>
-                                <div class="sector sm1 sca1"></div>
-                                <div class="sector sc2 sl2"></div>
-                        
-                                <!-- fila dos -->
-                                <div class="sector sm2"></div>
-                                <div class="sector spl1"></div>
-                                <div class="sector sm3"></div>
-                        
-                                <!-- fila tres -->
-                                <div class="sector sc3"></div>
-                                <div class="sector sm4"></div>
-                                <div class="sector sc4"> </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div th:replace="fragments/panio.html :: div"></div>
                 </div>
     
             </div>
         </div>
     </center>
-       
-
-
-
-
-
-
-  
     
-   
-
     <script src="/dibujadorJugadas.js"></script>
     <script th:inline="javascript"  >
         /*<![CDATA[*/

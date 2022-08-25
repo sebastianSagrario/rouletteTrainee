@@ -1,0 +1,22 @@
+<div class="popUp">
+    <a href="#" id="cerrar-popUpC" style="color: #fff;">CERRAR</a>                                           
+    <form  action="jugada/corte" class="container" method="get">
+        <div class="row">
+            <div class="col-12 mt-2">
+                <div class="card h-100">
+                    <div class="card-body practica">
+                        <h2>Ingrese valor de fichas</h2>
+                        <div th:each="valores : ${valoresFicha}">
+                            <input class="form-check-input" type="radio" th:value="${valores}" th:text="${valores}" name="fichas">            
+                    </div>
+                </div>
+            </div>            
+            <div class="col mt-2">
+                <center>
+                    <input class="col-12 col-sm-6 boton" type="submit" value="practicar!">
+                </center>
+            </div>
+        </div>
+    </form>
+</div>
+

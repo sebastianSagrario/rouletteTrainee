@@ -25,6 +25,52 @@
             <H1>CASINO</H1>
         </div>
     </nav>
+
+    <div class="container">
+        <main>
+            <div class="row">
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card h-100" >
+                        <div class="card-body  practica">
+                            <h2 th:text=" ${'Con fichas de '+ valorfichas +' pagar '+monto} "></h2>
+                            <form action="/jugada/evaluaCorte" method="post">
+                                <input type="hidden" th:value="${monto}" name="monto">
+                                <input type="hidden" th:value="${valorfichas}" name="valorFicha">
+                                <h2>Cantidad de fichas</h2>
+                                <input type="number" name="cantFichas" > <br>
+                                <h2>Complemento</h2>
+                                <input type="number" name="complemento" value=0 >                               
+                                <div class="input-group input-group-lg">                                    
+                                    <input class="btn btn-dark btn-lg" type="submit">        
+                                </div>
+                            </form>       
+                            <a class="btn btn-dark btn-lg" href="/" >volver a seleccion </a>                                  
+                            <div th:if="${error}!=null" th:text="${error}"></div>
+                        </div>
+                    </div>
+                </div>            
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card h-100"  >
+                        <div class="card-body  practica">
+                            <h3>Practica Cortes</h3>
+                            <img src="/bancaRuleta.jpg" alt="imgagen de una banca de ruleta" class="card-img">
+                            <p class="descripcion w-100">
+                                selecionar un valor de ficha y decide como aplicarle un corte a un monto determinado
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+
+
+
+
+
+<!--     
     <div class="container d-flex">
         <div class="row">
             <div class="col-12  m-3">
@@ -44,7 +90,7 @@
                 </div>
             </div>
         </div>
-    </div>            
+    </div>             -->
 
 
 

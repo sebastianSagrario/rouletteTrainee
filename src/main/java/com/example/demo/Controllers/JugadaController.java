@@ -27,20 +27,6 @@ public class JugadaController {
     }
 
     /**
-     * deplega el menu de seleccion de la jugada a la vista el usuario elije el
-     * tipo de jugada y con que ficha le va a salir
-     *
-     * @param mm
-     * @return
-     */
-    @GetMapping("/seleccionJugada")
-    public String seleccionJugada(ModelMap mm) {
-        mm.addAttribute("TiposJugadas", TipoJugada.values());
-        mm.addAttribute("valoresFicha", ValoresFicha.values());
-        return "seleccionJugada";
-    }
-
-    /**
      * envia a la vista una jugada para practicar posturas
      *
      * @param jugadaSelect el tipo de jugada en cuestion a practicar
@@ -50,7 +36,7 @@ public class JugadaController {
      */
     @GetMapping("/practicaJugada")
     public String practicaPostura(@RequestParam(required = false) TipoJugada jugadaSelect, @RequestParam(required = false) ValoresFicha fichas, ModelMap mm, RedirectAttributes rd) {
-        try {
+        try {            
             if (jugadaSelect == null) {
                 throw new Exception("debe seleccionar una jugada");
             }
@@ -63,7 +49,7 @@ public class JugadaController {
             System.out.println("erororrrr");
             System.out.println(e.getMessage());
             rd.addFlashAttribute("error", e.getMessage());
-            return "redirect:/jugada/seleccionJugada";
+            return "redirect:/";
         }
         return "practicaPostura";
     }
@@ -106,14 +92,8 @@ public class JugadaController {
         }
     }
 
-    @GetMapping("/seleccionCorte")
-    public String solicitarCorte(ModelMap mm) {
-        mm.addAttribute("valoresFicha", ValoresFicha.values());
-        return "corteSeleccion";
-    }
-
     /**
-     * desplega el formulario para que el aspirante haga un corte
+     * envia a la vista un corte para un valor de ficha
      *
      * @param fichas con las fichas que se va ahacer el corte
      * @param monto con el monto que se va tratar
@@ -137,7 +117,7 @@ public class JugadaController {
             return "corte";
         } catch (Exception e) {
             rd.addFlashAttribute("error", e.getMessage());
-            return "redirect:/jugada/seleccionCorte";
+            return "redirect:/";
         }
     }
 
@@ -153,16 +133,66 @@ public class JugadaController {
      */
     @PostMapping("/evaluaCorte")
     public String evaluaCorte(
-            @RequestParam Double monto,
-            @RequestParam Double complemento,
-            @RequestParam Integer cantFichas,
-            @RequestParam ValoresFicha valorFicha,
+            @RequestParam(required=false) Double monto,
+            @RequestParam(required=false) Double complemento,
+            @RequestParam(required=false) Integer cantFichas,
+            @RequestParam(required=false) ValoresFicha valorFicha,
             RedirectAttributes rd) {
-        //falta validar aca
-        if (monto != (complemento + cantFichas * valorFicha.getValorNominal())) {
-            return "fail";
+        try
+        {
+            validarCorte(monto, cantFichas, valorFicha,complemento);         
+            System.out.println("ewew");
+            System.out.println(monto != (complemento + cantFichas * valorFicha.getValorNominal()));
+            if (monto != (complemento + cantFichas * valorFicha.getValorNominal())) {
+                rd.addFlashAttribute("error", "esta seguro pagador?");            
+                return "redirect:/jugada/corte?fichas=" + valorFicha + "&monto=" + monto ;
+            }
+            else
+            {
+                rd.addFlashAttribute("exito", true);            
+                return "redirect:/";
+            }
+        }catch(Exception e)
+        {
+                rd.addFlashAttribute("error", e.getMessage());            
+               if (cantFichas==null || complemento==null)
+               {
+                   return "redirect:/jugada/corte?fichas=" + valorFicha + "&monto=" + monto ;
+               }
+                return "redirect:/";
         }
-        rd.addFlashAttribute("exito", true);
-        return "redirect:/";
     }
+
+    
+    /**
+     * se usa para validar los parametro del metodo evaluaCorte
+     * @param monto
+     * @param complemento
+     * @param cantFichas
+     * @param valorFicha
+     * @throws Exception 
+     */
+private void validarCorte(Double monto,Integer cantFichas,ValoresFicha valorFicha,Double complemento) throws Exception
+{
+            if (complemento==null)
+            {
+             throw new Exception("complemento no especificado");
+            }
+            if (cantFichas==null)
+            {   
+                 throw new Exception("cantidad Fichas no especificada");
+            }
+            if (valorFicha==null)
+            {
+                throw new Exception("valor de ficha no especificado");
+            }
+            if(monto==null)
+            {
+                throw new Exception("monto no especificado");
+            }
 }
+
+
+}
+
+
