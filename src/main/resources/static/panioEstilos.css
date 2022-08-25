@@ -14,12 +14,12 @@ body
     border-top: 10px solid yellow;
     border-bottom: 20px solid yellow;
     display: grid;
-    grid-template-columns: 9.3em 9.3em 9.3em;
-    grid-template-rows: 9.3em 9.3em 9.3em;
+    grid-template-columns: repeat(3,minmax(15px,150px));
+    grid-template-rows: repeat(3,minmax(15px,150px));
     background-color: yellow;
     gap: 10px;
-    height:470px ;
-    width: 470px;
+    max-height:470px ;
+    max-width: 470px;
     /* z-index: 0; */
 }
 .sector
