@@ -16,16 +16,7 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <nav class="navbar navbar-dark bg-dark " style="width: 100vw;">
-        <div class="container-fluid marcoTitulo">
-            <a class="navbar-brand" href="/">
-                <img src="/ruleta.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            </a>
-            <H1>CASINO</H1>
-        </div>
-    </nav>
-
+    <nav th:replace="fragments/navbar.html :: nav"></nav>
     <div class="container">
         <main>
             <div class="row">

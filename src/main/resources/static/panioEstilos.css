@@ -11,12 +11,12 @@ body
 
 .panio
 {
-    border-top: 10px solid yellow;
-    border-bottom: 20px solid yellow;
+    border-top: 10px solid rgba(219, 219, 2, 0.838);
+    border-bottom: 20px solid rgba(219, 219, 2, 0.838);
     display: grid;
     grid-template-columns: repeat(3,minmax(15px,150px));
     grid-template-rows: repeat(3,minmax(15px,150px));
-    background-color: yellow;
+    background-color:rgba(219, 219, 2, 0.838);
     gap: 10px;
     max-height:470px ;
     max-width: 470px;
@@ -26,7 +26,7 @@ body
 {
     height: 9.3em;
     width: 9.3;
-    background-color: green;
+    background-color: rgb(5, 152, 62);
     position: relative;
 }
 
