@@ -15,7 +15,7 @@
 	<name>posturas_casineras</name>
 	<description>C de casineta casinetaaa</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
                   <dependency>

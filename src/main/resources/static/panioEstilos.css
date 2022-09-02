@@ -1,0 +1,99 @@
+body
+{
+    font-family: sans-serif;
+    color: green;
+}
+
+.periferia
+{
+    background-color:  rgba(236, 236, 56, 1);
+}
+
+.panio
+{
+    border-top: 10px solid rgba(219, 219, 2, 0.838);
+    border-bottom: 20px solid rgba(219, 219, 2, 0.838);
+    display: grid;
+    grid-template-columns: repeat(3,minmax(15px,150px));
+    grid-template-rows: repeat(3,minmax(15px,150px));
+    background-color:rgba(219, 219, 2, 0.838);
+    gap: 10px;
+    max-height:470px ;
+    max-width: 470px;
+    /* z-index: 0; */
+}
+.sector
+{
+    height: 9.3em;
+    width: 9.3;
+    background-color: rgb(5, 152, 62);
+    position: relative;
+}
+
+.ficha
+{
+    outline: solid 2px black;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+}
+
+/* .c1 {    
+    bottom: -25px;
+    right: -25px;
+}
+.c2 {
+    bottom: -25px;
+    left: -25px;
+}
+.c3{
+    top: -25px;
+    right: -25px;
+}
+.c4{
+    top: -25px;
+    left: -25px;
+} */
+
+.m1
+{
+    bottom: -25px;   
+}
+
+.m2
+{    
+    right:-25px;
+}
+
+.m3
+{
+    left:-25px;
+}
+
+.m4
+{
+    top: -25px;
+}
+
+.pl1{
+
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.l1
+{
+   right: -25px;   
+
+}
+.l2
+{   
+    left: -25px;
+}
+.ca1{
+    left: 0;
+    right: 0;
+    top: -25px;
+    margin: auto;
+}

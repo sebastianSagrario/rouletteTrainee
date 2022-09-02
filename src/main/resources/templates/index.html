@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Monoton&family=Oswald:wght@300;348;400;700&family=Paytone+One&family=Staatliches&display=swap" rel="stylesheet">
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/estilosGeneral.css">
+    <link rel="stylesheet" href="/popUpEstilos.css">
+
 </head>
 <body>
-    <div>C de casineta casineta casineta</div>
-    <a href="/jugada/practicaPlenos">practica de plenos</a><br>
-    <a href="/jugada/practicaPlenosMedios">practica de plenos medio</a><br>
-    <a href="/jugada/practicaMedios">practicas medios</a><br>
-    <a href="/jugada/practicaJugadaMixta"> practica mixta</a><br>
+
+    <nav th:replace="fragments/navbar.html :: nav"></nav>
+
+    <div th:if="${exito}!=null" style="color:red ; size:200px;">"muy bieeeeen.Otra vez!"</div>
+
+    
+    <div class="container">
+        <main>
+            <div class="row">
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card h-100"  id="btnSelJugada" style="cursor:pointer;">
+                        <div class="card-body  practica">
+                            <h3>Practica Jugadas</h3>
+                            <img src="/pañoRuleta.png" alt="imagen bonita de un paño de ruleta" class="card-img">
+                            <p class="descripcion w-100">
+                                Practica una jugada aleatoria sobre un paño de ruleta americana. <br>                               
+                            </p>
+                        </div>
+                    </div>
+                </div>            
+                <div class="col-12 col-md-6 mt-2" id="btnSelCorte">
+                    <div class="card h-100"  style="cursor:pointer;">
+                        <div class="card-body  practica">
+                            <h3>Practica Cortes</h3>
+                            <img src="/bancaRuleta.jpg" alt="imgagen de una banca de ruleta" class="card-img">
+                            <p class="descripcion w-100">
+                                selecionar un valor de ficha y decide como aplicarle un corte a un monto determinado
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overlay" id="overlayJ">
+                <div th:replace="fragments/popUpJugada.html :: div"></div>
+            </div>
+            <div class="overlay" id="overlayC">
+                <div th:replace="fragments/popUpCorte.html :: div"></div>
+            </div>
+        </main>
+
+    </div>
+
+    <footer> Desarrollado por sebaElReCoder</footer>
+    <script src="popUp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
